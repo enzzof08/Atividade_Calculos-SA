@@ -4,33 +4,39 @@ const entradaDeDados = readline.createInterface({
     output: process.stdout
 })
 
-entradaDeDados.question('Digite o primeiro número de entrada: ', function(valor1){
+entradaDeDados.question('Digite o primeiro número de entrada: ', function (valor1) {
     let numero1 = valor1
 
-    entradaDeDados.question('Digite o secundo número de entrada: ', function(valor2){
+    entradaDeDados.question('Digite o secundo número de entrada: ', function (valor2) {
         let numero2 = valor2
 
-        entradaDeDados.question('Qual operação matemática deseja realizar? \n-soma  \n-subtração \n-multiplicação \n-divisão \n', function(operação){
+        entradaDeDados.question('Qual operação matemática deseja realizar? \n-Soma  \n-Subtração \n-Multiplicação \n-Divisão \n', function (operação) {
 
             let operaçãoReal = operação
 
             let calculos = require('./model/calculos')
 
-   
+
             let validacao = calculos.ValidarDados(numero1, numero2, operaçãoReal)
 
-            if(validacao){
+            if (validacao) {
 
-            let resultado = calculos.Calcular(numero1, numero2, operaçãoReal)
-            console.log('O resultado da operação é: ' + resultado)
+                let resultado = calculos.Calcular(numero1, numero2, operaçãoReal)
 
-            }else{
+                if(resultado){
+                console.log('O resultado da operação é: ' + resultado)
+                }else{
+                    console.log('ERRO: Não é permitido divisão por 0')
+                    entradaDeDados.close
+                }
+
+            } else {
                 console.log('Programa encerrado')
                 entradaDeDados.close()
             }
-            
 
- 
+
+
 
 
 
@@ -38,7 +44,7 @@ entradaDeDados.question('Digite o primeiro número de entrada: ', function(valor
 
 
         })
-        
+
 
     })
 
